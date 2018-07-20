@@ -1,0 +1,12 @@
+#! /bin/bash
+# readpair
+# first record
+while read rec1
+do
+	# second record
+	read rec2
+	# futher processing/testing goes here to test or compare both records
+	echo "This is record one of a pair: $rec1"
+	echo "This is record two of a pair: $rec2"
+	echo "-----------------------------"
+done < record.txt

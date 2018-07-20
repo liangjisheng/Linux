@@ -1,0 +1,14 @@
+#! /bin/bash
+# log
+# 
+MYDATE=`date +%d%m%y`
+# append MYDATE to the variable LOGFILE that holds the actual
+# filename of the log.
+LOGFILE=backup_log.$MYDATE
+# create the file
+>$LOGFILE
+
+MYTIME=`date +%d%R`
+LOGFILE2=admin_log.$MYTIME
+# create the file
+>$LOGFILE2

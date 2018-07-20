@@ -1,0 +1,17 @@
+#! /bin/bash
+# for_i
+for loop in 1 2 3 4 5
+do
+	echo $loop
+done
+
+for loop in "orange red blue grey"
+do
+	echo $loop
+done
+echo
+
+for loop in `ls`
+do
+	echo $loop
+done

@@ -1,0 +1,8 @@
+#! /bin/bash
+# evalit
+# eval显示传递给脚本的最后一个参数
+echo "Total number of arguments passed is $#"
+echo "The process ID is $$"
+# eval命令首先把$$#解析为当前shell的参数个数，然后在第二次扫描时
+# 得出最后一个参数
+echo "Last argument is " $(eval echo \$$#)

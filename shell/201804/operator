@@ -1,0 +1,27 @@
+#! /bin/bash
+
+num=1
+num=$num+1
+#Shell是弱类型语言，它并不知道num中保存的是一个数值，因此在遇到
+# num=$num+1这个命令时，Shell只是简单的把$num+1连在一起作为新的
+# 赋值给变量num
+echo $num
+
+num=1
+# $[]这种表示形式告诉Shell应该对其中的表达式求值
+num=$[$num + 1]
+echo $num
+
+# $[]可以接受不同基数的数字(默认为十进制)
+# 使用[base#]n来表示从2到36进制的任何一个n值
+echo $[2#10 + 1]
+echo $[16#10 + 1]
+echo $[8#10 + 1]
+
+expr 1 + 2
+echo
+
+num=1
+# let用于计算整数表达式的值
+let num=$num+1
+echo $num

@@ -1,0 +1,11 @@
+#! /bin/bash
+
+# read命令常常用来在输出一段内容后暂停，等待用户发出继续命令
+
+ls -l
+
+echo "Press <ENTER> to continue"
+# 此处暂停
+read
+
+echo "END"

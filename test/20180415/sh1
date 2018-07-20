@@ -1,0 +1,49 @@
+#!/bin/bash
+a="hello world"
+echo "A is:"
+echo $a
+num=2
+echo "this is the $numnd"
+echo "this is the ${num}nd"
+
+if [ "$	SHELL"="/bin/bash" ] 
+then
+	echo "your login shell is the bash(bourne again shell)"
+else
+	echo "your login shell is not bash but $SHELL"
+fi
+
+# -r测试一个文件是否可读
+mailfolder=/var/spool/mail/james
+if [ -r "$mailfolder" ]
+then
+	echo "$mailfolder has mail from:"
+else
+	echo "Can not read $mailfolder"
+fi
+
+# file 命令判断一个文件的文件类型
+ftype=expr file "test.tar.gz"
+echo $ftype
+
+# select 表达式是一种 bash 的扩展应用，尤其擅长于交互式使用。
+# 用户可以从一组不同的值中进行选择
+echo "What is your favorite OS?"
+os=(
+"Linux"
+"Gnu Hurd"
+"Free BSD"
+"Other"
+"quit"
+)
+echo $os
+select var in ${os[@]}
+do
+	if [ $var = "quit" ]
+	then
+		break
+	else
+		echo "You have selected $var"
+		echo "Try again"
+	fi
+done

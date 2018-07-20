@@ -1,0 +1,23 @@
+#!/bin/bash
+# $#参数个数
+if [ $# != 1 ]
+then
+	echo "Usage: `basename $0` [start|stop|help]"
+	exit 1
+fi
+
+OPT=$1
+case $OPT in
+start)
+	echo "start.. `basename $0`"
+	;;
+stop)
+	echo "stop.. `basename $0`"
+	;;
+help)
+	echo "help.. `basename $0`"
+	;;
+*)
+	echo "Usage:`basename $0` [start|stop|help]"
+	;;
+esac

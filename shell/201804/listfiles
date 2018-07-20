@@ -1,0 +1,10 @@
+#! /bin/bash
+
+# 显示有多少文件需要列出
+echo "$# file(s) to list"
+
+# 将参数列表中的值逐一赋值给变量file
+for file in $@
+do
+	ls -l $file
+done

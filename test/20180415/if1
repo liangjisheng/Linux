@@ -1,0 +1,32 @@
+#!/bin/bash
+if [ "10" -lt "12" ]
+then
+	echo "yes, 10 is less than 12"
+fi
+
+# 这里ls执行成功后返回的值为0（成功），if接收到成功信号则其条件为真，
+# 所以就打印出Yes了。这里不要跟C的if混淆了，在C中0为假，非0为真，
+# 而这里倒反过来了，0为真，非0则为假了
+if ls
+then
+	echo "yes"
+else
+	echo "no"
+fi
+
+echo "please input number 1 to 3"
+read number
+case $number in
+	1)
+		echo "you input 1"
+	;;
+	2)
+		echo "you input 2"
+	;;
+	3)
+		echo "you input 3"
+	;;
+	*)
+		echo "error! the number you input isn't 1 to 3"
+	;;
+esac

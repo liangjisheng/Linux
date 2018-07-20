@@ -1,0 +1,27 @@
+#! /bin/bash
+
+echo "Enter password:"
+read password
+
+# 中括号和条件之间的空格不能省略掉
+if [ "$password" = "mypasswd" ]
+then
+	echo "Welcome!!"
+fi	# if语句结束符
+echo
+
+echo "Enter password:"
+read password
+
+if [ "$password" = "john" ]
+then
+	echo "Hello, John!!"
+elif [ "$password" = "mike" ]
+then
+	echo "Hello, mike!!"
+elif [ "$password" = "ljs" ]
+then
+	echo "Hello, ljs"
+else
+	echo "Go away!!!"
+fi

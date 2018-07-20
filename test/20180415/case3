@@ -1,0 +1,17 @@
+#!/bin/bash
+# 要判断目前正在那一种平台上执行。此时，我们可以利用uname来找出系统资讯
+SYSTEM=`uname -s`
+case $SYSTEM in
+	Linux)
+		echo "My system is Linux"
+		echo "Do Linux stuff here..."
+	;;
+	FreeBSD)
+		echo "My system is FreeBSD"
+		echo "Do FreeBSD stuff here..."
+	;;
+	*)
+		echo "Unkonwn system : $SYSTEM"
+		echo "I don't what to do..."
+	;;
+esac

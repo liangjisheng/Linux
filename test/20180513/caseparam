@@ -1,0 +1,27 @@
+#! /bin/bash
+# caseparam
+if [ $# != 1 ]
+then
+	echo "Usage: `basename $0` [start|stop|help]" >&2
+	exit 1
+fi
+
+# assign the parameter to the variable OPT
+OPT=$1
+
+case $OPT in
+	start)
+		echo "starting..`basename $0`"
+		# code here to start a process
+		;;
+	stop)
+		echo "stopping..`basename $0`"
+		# code here to stop a process
+		;;
+	help)
+		# code here to display a help page
+		;;
+	*)
+		echo "Usage: `basename $0` [start|stop|help]"
+		;;
+esac

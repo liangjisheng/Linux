@@ -1,0 +1,10 @@
+#! /bin/bash
+# ifroot
+if [ "$LOGNAME" != "root" ]
+then
+	echo "You need to be root to run this script" >&2
+	exit 1
+else
+	# yes it is root
+	echo "Yes indeed you are $LOGNAME proceed"
+fi

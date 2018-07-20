@@ -1,0 +1,23 @@
+#! /bin/bash
+
+# 在Shell中空格用于分隔命令和传递給他的参数，或者分隔参数
+# test和[这两个是存放在/usr/bin目录下的实实在在的程序文件
+# 而赋值语句var="value"中间不能加空格，因为var是一个变量名
+# 而不是某个可执行程序
+
+# test和[命令可以对一下3类表达式进行测试
+# 字符串比较
+# 文件测试
+# 数字比较
+
+# -z str 当str长度为0是返回真
+# -n str 当str长度大于0时返回真
+# str1 = str2 两个字符串相等是返回真
+# str1 != str2 两个字符串不相等是返回真
+
+read password
+
+if [ -z "$password" ]
+then
+	echo "Please enter the password"
+fi
