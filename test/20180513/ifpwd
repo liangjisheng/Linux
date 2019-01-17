@@ -1,8 +1,0 @@
-#! /bin/bash
-# ifpwd
-DIRECTORY=`pwd`
-if [ "$DIRECTORY" != "/" ]
-then
-	echo "not $DIRECTORY to run this script" >&2
-	exit 1
-fi

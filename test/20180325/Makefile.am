@@ -1,3 +1,0 @@
-AUTOMAKE_OPTIONS=foreign
-bin_PROGRAMS= my
-my_SOURCES= my.c

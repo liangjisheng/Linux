@@ -1,2 +1,2 @@
-# Linux
-Linux系统相关代码
+# linux study
+1. shell script

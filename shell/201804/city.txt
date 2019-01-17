@@ -1,5 +1,0 @@
-Beijing 010
-Shanghai 021
-Tianjin 022
-Hangzhou 0571
-Shanghai 021

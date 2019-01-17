@@ -1,7 +1,0 @@
-#! /bin/bash
-
-# 默认情况下,Bash只认识空格、制表符和换行符
-read first second
-
-echo $first
-echo $second

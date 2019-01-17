@@ -1,9 +1,0 @@
-#! /bin/bash
-# whilecount
-COUNTER=0
-# does the counter = 5?
-while [ $COUNTER -lt 5 ]
-do
-	COUNTER=`expr $COUNTER + 1`
-	echo $COUNTER
-done
