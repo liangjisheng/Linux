@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# name  : func2.sh
+# author: liangjisheng
+# time  : 2018-12-28 00:27:01
+
+yes_or_no() {
+    echo "Is your name $* ?"
+    while true
+    do
+        echo -n "Enter yes or no: "
+        read x
+        case "$x" in
+            y | yes) return 0;;
+            n | no ) return 1;;
+            *) echo "Answer yes or no"
+        esac
+    done
+}
+
+echo "Original parameters are $*"
+
+if yes_or_no "$1"
+then
+    echo "Hi $1 nice name"
+else
+    echo "Never mind"
+fi
+
+exit 0
