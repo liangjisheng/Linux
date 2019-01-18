@@ -12,4 +12,6 @@ echo "" >> $1
 echo "" >> $1
 echo "exit 0" >> $1
 
+chmod u+x $1
+
 exit 0
