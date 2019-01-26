@@ -1,0 +1,10 @@
+# this is a makefile to verify the rebuild rule
+
+# 终极目标被声明为伪目标后，无论如何都会进行重建
+.PHONY: aim_1
+
+aim_1:test_1
+	touch aim_1
+
+aim_2:
+	@echo "this is " $@

@@ -1,0 +1,14 @@
+# this is a makefile to verify the default aim
+
+# 模式目标无法被认定为终极目标,%符号可以匹配任何未显示定义的目标
+%:
+	@echo "this is " $@
+
+aim_1:
+	@echo "this is " $@
+
+aim_2:
+	@echo "this is " $@
+
+aim_3:
+	@echo "this is " $@

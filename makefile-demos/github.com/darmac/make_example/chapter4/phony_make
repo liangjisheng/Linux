@@ -1,0 +1,14 @@
+# this is a makefile to verify the default aim
+
+# 如前面所述的“.PHONY:”规则，代表声明伪目标，这则规则可以被执行，却无法作为终极目标
+.PHONY: aim_2
+	@echo "this is " $@
+
+aim_1:
+	@echo "this is " $@
+
+aim_2:
+	@echo "this is " $@
+
+aim_3:
+	@echo "this is " $@

@@ -1,0 +1,23 @@
+# this is a basic makefile
+
+.PHONY:all clean
+
+vari_a="original vari a"
+vari_b="original vari b"
+
+# makefile 中可以使用include指令来包含另一个文件
+# 当make识别到include指令时，会暂停读入当前的makefile文件，
+# 并转而读入include指定的文件，之后再继续读取本文件的剩余内容
+# 值得一提的是include指示符所指示的文件名可以是任何shell能够识别的文件名，
+# 这表明include还可以支持包含通配符的文件名
+# include ./makefile_dir/inc_a
+# include ./makefile_dir/inc_*
+include inc_a inc_b
+
+all:
+	@echo $(vari_a)
+	@echo $(vari_b)
+	@echo $(vari_c)
+	@echo $(vari_d)
+
+clean:

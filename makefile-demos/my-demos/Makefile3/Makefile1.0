@@ -1,0 +1,40 @@
+# https://www.cnblogs.com/owlman/p/5514724.html
+
+# main.exe: main.c print.c add.c sub.c mul.c print.h
+#	gcc -o main.exe main.c print.c add.c sub.c mul.c print.h
+
+cc = gcc
+prom = main.exe
+deps = print.h
+obj = main.o print.o add.o sub.o mul.o
+
+$(prom):$(obj)
+	$(cc) -o $(prom) $(obj)
+
+# main.o: main.c $(deps)
+#	$(cc) -c main.c
+
+# print.o: print.c $(deps)
+# 	$(cc) -c print.c
+
+# add.o: add.c $(deps)
+# 	$(cc) -c add.c
+
+# sub.o: sub.c $(deps)
+# 	$(cc) -c sub.c
+
+# mul.o: mul.c $(deps)
+# 	$(cc) -c mul.c
+
+# 首先是%.o:%.c，这是一个模式规则，表示所有的.o目标都依赖于与它同名的.c文件
+# 其中$<代表的是依赖关系表中的第一项（如果我们想引用的是整个关系表，那么就应该使用$^）
+# 而$@代表的是当前语句的目标，即%.o
+# 这样一来，make命令就会自动将所有的.c源文件编译成同名的.o文件。不用我们一项一项去指定了
+%.o : %.c $(deps)
+	$(cc) -c $< -o $@
+
+clean:
+	rm -f $(obj)
+
+cleanExe:
+	rm -f $(prom)
