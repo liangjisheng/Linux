@@ -1,0 +1,3 @@
+# Kubernetes
+
+Kubernetes的2种部署方式：Minikube开发环境+Kubeadm单节点集群环境
