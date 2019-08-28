@@ -26,3 +26,4 @@ go build -o $TARGET main.go
 
 # 子进程完全脱离Shell的命令
 nohup ./$TARGET <./$INPUT >nohup.out 2>&1 &
+# echo "input text" |nohup ./$TARGET >nohup.out 2>&1 &
