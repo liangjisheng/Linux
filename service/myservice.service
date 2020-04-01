@@ -1,0 +1,16 @@
+[Unit]
+Description=service-test
+
+[Service]
+User=root
+WorkingDirectory=/root
+ExecStart=/usr/bin/python3 /root/svc-test.py
+SuccessExitStatus=0
+TimeoutStopSec=10
+Restart=on-failure
+RestartSec=5
+KillMode=process
+Type=notify
+
+[Install]
+WantedBy=multi-user.target
