@@ -5,12 +5,13 @@ Description=service-test
 User=root
 WorkingDirectory=/root
 ExecStart=/usr/bin/python3 /root/svc-test.py
+ExecStop=/bin/kill -s TERM $MAINPID
 SuccessExitStatus=0
 TimeoutStopSec=10
-Restart=on-failure
+Restart=always
 RestartSec=5
 KillMode=process
-Type=notify
+Type=simple
 
 [Install]
 WantedBy=multi-user.target

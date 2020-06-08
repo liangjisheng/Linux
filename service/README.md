@@ -1,6 +1,7 @@
 # README
 
 [study](https://www.jianshu.com/p/b75d88e5aa61)
+[type](https://blog.csdn.net/Sardkit/article/details/79911925)
 
 1.vim /root/svc-test.py
 1.vim /etc/systemd/system/svc-test.service
