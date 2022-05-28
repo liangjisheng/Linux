@@ -289,3 +289,10 @@ server {
     }
 }
 ```
+
+### 传递给后段真实ip地址
+
+```conf
+proxy_set_header X-Real-IP       $remote_addr;
+proxy_set_header X-Forwarded-For $remote_addr;
+```

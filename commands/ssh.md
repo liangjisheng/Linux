@@ -39,3 +39,15 @@ ssh -f -N -L 127.0.0.1:80:192.168.13.148:80 user@192.168.13.148
 ssh -f -N -R 8081:127.0.0.1:80 user@192.168.13.149
 监听了B机器的 8081 端口，把该端口的请求，转发到A机器的80端口
 在B机器 curl 127.0.0.1:8081 访问A机器服务
+
+## 使用多个公钥
+
+重启电脑后，如果遇到个人和公司的代码不能同时提交，且报下面的错误的话
+
+Permission to liangjisheng/go-books.git denied to liangjishengzks
+
+则在终端执行下这个命令，意思是把对应的私钥重新加入到 mac 的 keychain 服务中去
+
+```shell
+ssh-add -K /Users/liangjisheng/.ssh/id_rsa_liangjisheng
+```
