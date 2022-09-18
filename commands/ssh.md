@@ -42,6 +42,12 @@ ssh -f -N -R 8081:127.0.0.1:80 user@192.168.13.149
 
 ## 使用多个公钥
 
+默认测试方式
+
+```shell
+ssh -T git@github.com
+```
+
 重启电脑后，如果遇到个人和公司的代码不能同时提交，且报下面的错误的话
 
 Permission to liangjisheng/go-books.git denied to liangjishengzks
@@ -49,5 +55,83 @@ Permission to liangjisheng/go-books.git denied to liangjishengzks
 则在终端执行下这个命令，意思是把对应的私钥重新加入到 mac 的 keychain 服务中去
 
 ```shell
+ssh-add -K /Users/liangjisheng/.ssh/id_rsa
 ssh-add -K /Users/liangjisheng/.ssh/id_rsa_liangjisheng
+ssh-add -K /Users/liangjisheng/.ssh/id_rsa_web3
+```
+
+## 增加 ssh 秘钥
+
+生成公私钥
+
+```shell
+ssh-keygen -t rsa -f ~/.ssh/id_rsa_web3 -C "liangjisheng@web3.com"
+```
+
+在 ~/.ssh/config 文件中增加配置
+
+Host: 自己取的名字, 可以是任何字符串
+HostName: ssh 克隆时地址中的网站的名字
+User: 默认使用的用户 git, 克隆时用户都是 git, 所以设为 git 就行
+IdentityFile: 生成密钥时的私钥文件
+
+```conf
+Host web3.github.com
+Hostname github.com
+User git
+IdentityFile ~/.ssh/id_rsa_web3
+```
+
+对应不同的名称，要用 Host 的名称来区分测试
+
+```shell
+# 这里的值是上面定义的 Hosts, 因为上面已经指定 User 为 git,所以可以省略
+ssh -T web3.github.com
+# 或者
+ssh -T git@web3.github.com
+```
+
+如果测试有问题可以试试配置 ssh key 代理
+
+```shell
+# 查看系统ssh-key代理
+ssh-add -l
+
+# 以上命令如果输出 The agent has no identities. 则表示没有代理
+# 如果系统有代理，可以执行下面的命令清除代理, 但不需要, 之前的就让它存在就好了
+# ssh-add -D
+
+# 然后依次将不同的ssh添加代理
+ssh-add ~/.ssh/id_rsa_web3
+# 如果使用 ssh-add ~/.ssh/id_rsa的时候报如下错误，则需要先运行一下 ssh-agent bash 命令后再执行 ssh-add …命令
+# Could not open a connection to your authentication agent.
+
+# 再次测试
+ssh -T git@web3.github.com
+```
+
+clone code
+
+```shell
+# ssh 原 url
+# git clone git@github.com:web3-internal/oases-server.git
+
+# 需要修改为
+git clone web3.github.com:web3-internal/oases-server.git
+# ~/.ssh/config 中已经指定 User 为 git, 所以可以省略
+# 或者
+git clone git@web3.github.com:web3-internal/oases-server.git
+```
+
+使用 ssh 克隆时, 系统会先查找 ~/.ssh/config 中的配置, 如果没有找到则会使用默认的密钥文件 ~/.ssh/id_rsa
+所以如果你网站绑定的是 ~/.ssh/id_rsa.pub 则完全没有必要在 ~/.ssh/config 中配置
+
+一个小技巧, 当重装系统时, 可以保存好目录 ~/.ssh, 重装完系统后, 安装好 git, 再把保存的 ~/.ssh 目录放到用户目录下就可以了
+这样不用重新配置 git 的 ssh key, 也不用重新到网站绑定
+
+配置本仓库 user.name and user.email
+
+```shell
+git config user.name "web3liangjisheng"
+git config user.email "liangjisheng@web3.com"
 ```

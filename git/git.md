@@ -15,6 +15,9 @@ git remote prune origin
 # 删除本地多余分支
 git branch -D feature/chatfix
 
+# 修改当前分支名为 main
+git branch -M main
+
 # 修改最近一次提交信息
 git commit --amend
 
