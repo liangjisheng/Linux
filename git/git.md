@@ -28,6 +28,13 @@ git config --global user.email johndoe@example.com
 
 # 查看 git log
 git log --oneline -5
+
+# 撤销所有文件的修改
+git checkout .
+# 强制更新代码
+git push -f origin feat/referral
+# 取消 merge
+git merge --abort
 ```
 
 本地初始化 git 仓库

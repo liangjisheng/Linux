@@ -125,4 +125,6 @@ curl -x socks5://james:cats@myproxy.com:8080 https://www.example.com
 curl -x james:cats@myproxy.com:8080 https://www.example.com
 # -X参数指定 HTTP 请求的方法
 curl -X POST https://www.example.com
+# 返回执行 curl 命令机器的 ip
+curl ifconfig.me
 ```
