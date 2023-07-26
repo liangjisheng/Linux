@@ -41,7 +41,13 @@ git merge --abort
 
 ```shell
 git init
-git remote add origin https://gitee.com/kotlindev/test1.git
+git config user.name liangjisheng
+git config user.email liangjisheng@example.com
+git add --all
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:liangjisheng/repo.git
+git push -u origin main
 ```
 
 回退代码的2中方式 [revert](./revert.md) 和 [reset](./reset.md)
