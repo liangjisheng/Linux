@@ -21,10 +21,19 @@ git branch -M main
 # 修改最近一次提交信息
 git commit --amend
 
+git config --list
 # 配置用户名
 git config --global user.name "John Doe"
 # 配置邮箱
 git config --global user.email johndoe@example.com
+# 设置初始分支名为 main
+git config --global init.defaultBranch main
+
+# 添加 / 删除配置项
+git config --local -–add site.name y
+git config --local -–unset site.name
+
+git config --global LANG=en_GB
 
 # 查看 git log
 git log --oneline -5
@@ -37,7 +46,9 @@ git push -f origin feat/referral
 git merge --abort
 ```
 
-本地初始化 git 仓库
+回退代码的2中方式 [revert](./revert.md) 和 [reset](./reset.md)
+
+## 本地初始化 git 仓库
 
 ```shell
 git init
@@ -50,4 +61,16 @@ git remote add origin git@github.com:liangjisheng/repo.git
 git push -u origin main
 ```
 
-回退代码的2中方式 [revert](./revert.md) 和 [reset](./reset.md)
+git 显示中英文切换
+
+```shell
+# linux
+echo "alias git='LANG=en_GB git'" >> ~/.bashrc
+echo "alias git='LANG=zh_CN git'" >> ~/.bashrc
+source ~/.bashrc
+
+# mac
+echo "alias git='LANG=en_GB git'" >> ~/.zsh_aliases
+echo "alias git='LANG=zh_CN git'" >> ~/.zsh_aliases
+source ~/.zshrc
+```
