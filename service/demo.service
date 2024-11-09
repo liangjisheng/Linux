@@ -1,0 +1,41 @@
+[Unit]
+Description=My Custom Service
+# 在网络服务启动后启动
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/root
+Type=simple
+ExecStart=/usr/local/bin/my_service
+Restart=always
+RestartSec=5
+KillMode=process
+SuccessExitStatus=0
+TimeoutStopSec=10
+
+# 根据需要设置服务的环境变量
+Environment="VAR1=value1"
+Environment="VAR2=value2"
+# 或者将环境变量存储在文件中，并使用EnvironmentFile选项加载
+# EnvironmentFile=/etc/my_service.env
+
+# 这样配置后，服务的标准输出和错误输出将被重定向到系统日志中，方便日后查看
+# StandardOutput=syslog
+# StandardError=syslog
+
+# 在这个示例中，在服务启动之前创建了一个临时目录，在启动后修改了目录的权限，
+# 在停止服务时先删除了临时目录中的内容，然后再删除临时目录本身。
+ExecStartPre=/bin/mkdir -p /var/run/my_service
+ExecStartPost=/bin/chmod 755 /var/run/my_service
+ExecStop=/bin/rm -rf /var/run/my_service
+ExecStopPost=/bin/rmdir /var/run/my_service
+
+# 在这个示例中，限制了服务的 CPU 分配权重为 512，内存限制为 1GB，并且限制了
+# 服务的最大任务数为 1000
+CPUShares=512
+MemoryLimit=1G
+TasksMax=1000
+
+[Install]
+WantedBy=multi-user.target

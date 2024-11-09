@@ -9,6 +9,7 @@ ssh-keygen 生成 ed25519 公私钥
 
 ```shell
 ssh-keygen -f ~/.ssh/id_ed25519_liangjisheng -t ed25519
+ssh-keygen -f ~/.ssh/id_rsa_deploy -t rsa -b 4096 -C deploy_artgo
 ```
 
 ssh 客户端配置
@@ -38,18 +39,16 @@ mac 上的客户端配置文件应该是 ~/.ssh/config
 
 ```conf
 Host github.com
+  HostName github.com
   User git
   ProxyCommand nc -v -x 127.0.0.1:11086 %h %p
   IdentityFile ~/.ssh/id_rsa
-  ; PasswordAuthentication no
-  ; PubKeyAuthentication yes
 
 Host github-liangjisheng
   HostName github.com
   User git
   ; Port 1024
   ProxyCommand nc -v -x 127.0.0.1:11086 %h %p
-  Preferredauthentications publickey
   IdentityFile ~/.ssh/id_rsa_liangjisheng
 
 Host *
@@ -58,6 +57,65 @@ Host *
   AddKeysToAgent yes
   ServerAliveInterval 60
   StrictHostKeyChecking no
+  Preferredauthentications publickey
 ```
 
 需要注意的是。因为 ssh 客户端是按顺序解释选项的, 通用配置该放在文件的底部。如果放在最上面，在客户端读取下面的特定主机选项之前，选项值就会被固定下来。在上面的案例中，把 (Host *) 放在文件的开头会导致用户为 Default
+
+配置中的 User 写 git 或者特定的用户名 liangjisheng 都是可以的，一般默认就是 git
+
+```shell
+# 查看链接是否正常
+ssh -vT git@github.com
+ssh -T git@github.com
+ssh -T git@ssh.github.com
+# 查看是否可以通过端口 443 建立 ssh 链接
+ssh -T -p 443 git@github.com
+ssh -T -p 443 git@ssh.github.com
+# 列出添加到 ssh authentication agent 中的密钥
+# Find and take a note of your public key fingerprint.
+ssh-add -l -E sha256
+```
+
+如果出现下面的问题
+
+```txt
+git@github.com: Permission denied (publickey,password,keyboard-interactive)
+```
+
+可以将配置 HostName 从 github.com 改成 ssh.github.com, 具体[参考](https://stackoverflow.com/questions/73784685/gitgithub-com-permission-denied-publickey-password-keyboard-interactive)
+
+## clashX
+
+如果使用 clashX 作为代理, 可以写成下面这样，但要把 ~/.config/clash/clash.yaml 里面的 github.com 的规则由 Proxies 改为 DIRECT
+
+```conf
+- DOMAIN-SUFFIX,github.com,Proxies
+从原来上面规则的改成下面的规则
+- DOMAIN-SUFFIX,github.com,DIRECT
+```
+
+在 ~/.ssh/config 里面修改内容，默认使用 22 端口连接 github
+
+```conf
+Host github.com
+  HostName github.com
+  User git
+  ProxyCommand nc -v -x 127.0.0.1:7890 %h %p
+  Preferredauthentications publickey
+  IdentityFile ~/.ssh/id_rsa
+  AddKeysToAgent yes
+```
+
+另个一方式是在 ~/.ssh/config 里面使用 443 端口连接 github, 这样就不用改 clashX 的规则
+
+```conf
+Host github.com
+  HostName ssh.github.com
+  Port 443
+  User git
+  ProxyCommand nc -v -x 127.0.0.1:7890 %h %p
+  Preferredauthentications publickey
+  IdentityFile ~/.ssh/id_rsa
+  AddKeysToAgent yes
+```
